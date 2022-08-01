@@ -1,0 +1,20 @@
+---
+title: "tasa_emp"
+author: "Claudia1930"
+date: "2022-08-01"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readr)
+library(dplyr)
+library(ggplot2)
+```
+
+```{r}
+tas_emp <- read_csv("datos/tas_emp.csv")
+```
+
+**Introducción**
+Los datos a relevar contienen tasa de empleo desde el año 2003 hasta el año 2019, esto discriminado por sexo (varón, mujer). A su vez, en cada año se especifica el total de tasa de empleo.
