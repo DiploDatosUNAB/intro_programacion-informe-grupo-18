@@ -1,6 +1,6 @@
 ---
-title: "titulo"
-author: "nombres"
+title: "TASA DE EMPLEO"
+author: "CLAUDIA1030"
 output: html_document
 ---
 
@@ -8,15 +8,18 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 # Cargar los paquetes necesarios acá
+library(readr)
+library(dplyr)
+library(ggplot2)
 ```
 
 
 ## Introducción
-
-
+**La tabla corresponde a un relevamiento de la tasa de empleo realizada durante el período comprendido por los años 2003 al 2019,
+Así mismo, dentro de cada año en estudio se releva información de tasa de empleo discriminada por sexo: varón, mujer**
 
 ## Exploración de los datos
-
+**Se distinguen tres variables principales a saber: 1-Tasa de empleo anual 2-Tasa de empleo anual de mujeres 3-Tasa de empleo anual de varones.
 
 ```{r}
 # Código para cargar o leer los datos
