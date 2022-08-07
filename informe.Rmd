@@ -23,13 +23,19 @@ Así mismo, dentro de cada año en estudio se releva información de tasa de emp
 
 ```{r}
 # Código para cargar o leer los datos
+library(readr)
+tas_emp <- read_csv("tas_emp.csv")
 ```
 
-
+#filtrar datos por sexo
 
 ```{r}
 # Cödigo de R acá 
 # Agregá más bloques según sea necesario
+filter(tas_emp, anio == 2003)
+```
+```{r}
+tas_emp <- tas_emp %>% filter(anio != "m")
 ```
 
 
