@@ -60,7 +60,7 @@ View(sd)
 ```{r}
 range(tasa_empleo)
 ```
-
+#CONCLUSIÓN: de acuerdo a los datos analizados (tasa de  empleo anual período 2003 al 2019), no se encuentra dispersión significativa de datos de manera que la tasa se empleo se mantiene bastante uniforme en el período señalado. El 68% de las tasas se encuentran entre el 56,6% y el 56,9 %.
 
 ## Hipótesis
 
