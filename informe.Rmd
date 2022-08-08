@@ -35,10 +35,28 @@ tas_emp <- read_csv("tas_emp.csv")
 filter(tas_emp, anio == 2003)
 ```
 ```{r}
-tas_emp <- tas_emp %>% filter(anio != "m")
+tas_emp1 <- tas_emp %>% filter(sexo != "m" & sexo != "v")
+write.csv(tas_emp1)
 ```
-
-
+#Sacar promedio de datos anuales
+```{r}
+str(tas_emp1)
+```
+```{r}
+colnames(tas_emp1)
+```
+```{r}
+tas_emp1 <- select(tas_emp1, tasa_empleo)
+View(tas_emp1)
+tasa_empleo <- c (54.3, 56.7, 58.3, 59.4, 59.1, 59.1, 58.8, 58.7, 58.0, 57.5, 57.1, 57.2, 59.9, 59.2, 58.8, 58.6, 59.6) 
+mean(tasa_empleo)
+```
+#Se calcula desvío estandar de datos anuales correspondientes a tasa de empleo sin discriminar sexo
+```{r}
+sd = sd (tasa_empleo)
+View(sd)
+```
+#De acuerdo al valor obtenido de desvío estandar el período considerado para el análisis de datos correspondiente a tasa de empleo resulta insuficiente para 
 
 ## Hipótesis
 
