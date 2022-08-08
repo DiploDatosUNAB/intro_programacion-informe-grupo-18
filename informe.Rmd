@@ -56,7 +56,11 @@ mean(tasa_empleo)
 sd = sd (tasa_empleo)
 View(sd)
 ```
-#De acuerdo al valor obtenido de desvío estandar el período considerado para el análisis de datos correspondiente a tasa de empleo resulta insuficiente para 
+#Se calcula el rango de datos (valores máximos y mínimos)
+```{r}
+range(tasa_empleo)
+```
+
 
 ## Hipótesis
 
