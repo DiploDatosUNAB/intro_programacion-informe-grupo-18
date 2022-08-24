@@ -38,7 +38,48 @@ tas_emp %>%
   summarise(promedio_empleo = mean(tasa_empleo),
             sd_empleo = sd (tasa_empleo))
 ```
+```{r}
+tas_emp %>%
+  left_join(tas_sub) %>%
+  filter(sexo != "TOTAL" & sexo != "v")
+```
 
+#Se calcula promedio y desvío estándar de tasa empleo de mujeres período 2003 - 2019
+```{r}
+tas_emp %>%
+  left_join(tas_sub) %>%
+  filter(sexo != "TOTAL" & sexo != "v") %>%
+  summarise(promedio_mujeres = mean(tasa_empleo),
+            sd_empleo = sd (tasa_empleo))
+```
+```{r}
+tas_emp %>%
+  left_join(tas_sub) %>%
+  filter(sexo != "TOTAL" & sexo != "v") %>%
+  summarise(promedio_subm = mean(tasa_subocupacion),
+            sd_empleo = sd (tasa_subocupacion))
+```
+# Se calcula promedio de tasa de empleo y subocupacion de varones en el período 2003 - 2019
+```{r}
+tas_emp %>%
+  left_join(tas_sub) %>%
+  filter(sexo != "TOTAL" & sexo != "m")
+```
+```{r}
+tas_emp %>%
+  left_join(tas_sub) %>%
+  filter(sexo != "TOTAL" & sexo != "m") %>%
+  summarise(promedio_empleo = mean(tasa_empleo),
+            sd_empleo = sd (tasa_empleo))
+```
+# Se calcula la tasa de subocupacion para varones en el periodo 2003 - 2019
+```{r}
+tas_emp %>%
+  left_join(tas_sub) %>%
+  filter(sexo != "TOTAL" & sexo != "m") %>%
+  summarise(promedio_subv = mean(tasa_subocupacion),
+            sd_subocupación = sd(tasa_subocupacion))
+```
 
 ```
 
