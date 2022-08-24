@@ -20,11 +20,29 @@ Así mismo, dentro de cada año en estudio se releva información de tasa de emp
 #VARIABLES A TRABAJAR
 Se trabaja en base a dos tablas que contienen las siguientes variables tomadas en el período 2003 - 2019: 1-Tasa de empleo anual 2-Tasa de empleo anual de mujeres 3-tasa de empleo anual de varones 4-tasa de subocupación anual mujeres 5-tasa de subocupación anual varones
 
-```{r cars}
-summary(cars)
+```{r}
+tas_emp %>%
+  left_join(tas_sub)
+```
+# Se filtra los datos de Tasa de Empleo Anual
+```{r}
+tas_emp %>%
+  left_join(tas_sub) %>%
+  filter(sexo != "m" & sexo !="v")
+```
+# En base a los datos filtrados se calcula el promedio de tasa de empleo en el período 2003 - 2019
+```{r}
+tas_emp %>%
+  left_join(tas_sub) %>%
+  filter(sexo != "m" & sexo !="v") %>%
+  summarise(promedio_empleo = mean(tasa_empleo),
+            sd_empleo = sd (tasa_empleo))
 ```
 
-## Including Plots
+
+```
+
+
 
 You can also embed plots, for example:
 
