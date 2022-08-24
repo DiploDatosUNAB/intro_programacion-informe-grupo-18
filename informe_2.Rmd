@@ -1,0 +1,35 @@
+---
+title: "TP_CORREGIDO"
+author: "Claudia1930"
+date: "2022-08-24"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readr)
+library(dplyr)
+library(ggplot2)
+```
+
+#INTRODUCCIÓN
+**Las tablas contienen datos relevados correspondientes a las tasas de empleo/subocupación durante el período comprendido por los años 2003 al 2019,
+Así mismo, dentro de cada año en estudio se releva información de tasa de empleo y subocupación discriminada por sexo: varón, mujer**
+
+#VARIABLES A TRABAJAR
+Se trabaja en base a dos tablas que contienen las siguientes variables tomadas en el período 2003 - 2019: 1-Tasa de empleo anual 2-Tasa de empleo anual de mujeres 3-tasa de empleo anual de varones 4-tasa de subocupación anual mujeres 5-tasa de subocupación anual varones
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
