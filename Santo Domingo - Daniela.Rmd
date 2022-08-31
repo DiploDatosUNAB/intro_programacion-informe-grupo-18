@@ -1,0 +1,45 @@
+---
+title: "Santo_Domingo"
+author: "Claudia1930"
+date: "2022-08-28"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readxl)
+library(dplyr)
+library(ggplot2)
+```
+#INTRODUCCIÓN
+El presente trabajo corresponde a trabajo de investigación/extensión realizado para determinar la calidad de fibra de llama en la Jurisdicción Municipal de Rinconada - Departamento Rinconada - Provincia de Jujuy -. Esto como punto de partida para iniciar proceso de mejora en la comercialización de fibra principalmente en lo que respecta al ingresto de los/as productores/as, a partir de la determinación de la estructrura poblacional de llamas en el Distrito de Santo Domingo (Rinconada)
+
+#DESARROLLO
+Para el análisis se toma la base de datos de tropa de llamas pertenecientes a la productora Sonia Martínez, donde se toma la muestra de 59 animales sobre un efectivo de 85. Las varialbles analizadas corresponden a : 1)Edad 2)Sexo 3)Color de Pezuñas 4)Tipo morfológico 5)Medidas Zoométricas 6)Patrón de color 7)Mancha 8)Condición Corporal 9) Estado Fisiológico 10) Largo de Mecha 11) Tipo de Mecha 12)Color 13)Diámetro1 14)Diámetro2 15) Promedio de diámetro1 16)Promedio de diámetro 2022. Los datos son tomados en terreno por el equipo técnico de la Subsecretaría de Agricultura Familiar, Campesina e Indígena y analizados en laboratoria por el grupo de investigadores de la Universidad Católica de  Córdoba.
+```{r}
+BD_Santo_Domingo <- read_excel("~/Documents/Github/datos/TP_LLAMAS/BD_Santo_Domingo.xlsx", 
+    sheet = "SOMA_BD", skip = 4)
+BD_Santo_Domingo
+```
+#Se analizan datos de Edad
+```{r}
+BD_1 <- select(BD_Santo_Domingo, Edad, Pezuñas, Sexo, Morfotipo)
+BD_1
+```
+#Se calcula frecuencia y porcentaje de categorías según edad
+```{r}
+table(BD_1$Edad)
+table(BD_1$Edad)/length(BD_1$Edad)
+```
+#Cálculo de frecuencia y porcentaje según morfotipo
+```{r}
+table(BD_1$Morfotipo)
+table(BD_1$Morfotipo)/length(BD_1$Morfotipo)
+```
+#Cálculo de frecuencia y porcentaje según sexo
+```{r}
+table(BD_1$Sexo)
+table(BD_1$Sexo)/length(BD_1$Sexo)
+```
+
+
