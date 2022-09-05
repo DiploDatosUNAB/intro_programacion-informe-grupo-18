@@ -23,7 +23,7 @@ BD_Santo_Domingo <- read_excel("~/Documents/Github/datos/TP_CORREGIDO/BD_Santo_D
     sheet = "SOMA_BD", skip = 4)
 BD_Santo_Domingo
 ```
-#Se analizan datos de Edad
+#Tabla de variables: Edad, Pezuñas, Sexo, Morfotipo, Tamañao de Mecha (TM), Color y Finura
 ```{r}
 BD_1 <- select(BD_Santo_Domingo, Edad, Pezuñas, Sexo, Morfotipo, TM, COLOR, Finura)
 BD_1
@@ -48,9 +48,9 @@ table(BD_1$TM)/length(BD_1$TM)*100
 table(BD_1$COLOR)
 table(BD_1$COLOR)/length(BD_1$COLOR)*100
 ```
-#Tabla de Medidas Zoométricas
+#Tabla de Medidas Zoométricas: Perímetro Toráxico (PT), Perímetro Horizontal (PH) y Altura
 ```{r}
-BD_2 <- select(BD_Santo_Domingo, "PT", "PH", "A")
+BD_2 <- select(BD_Santo_Domingo, "PT", "PH", "A", "Condición Corporal")
 BD_2
 ```
 #Cálculo de promedio PT, PH Y A
@@ -70,7 +70,7 @@ var(BD_2$PT)
 var(BD_2$PH)
 var(BD_2$A)
 ```
-#Cálculo de promedio de finura
+#Tabla de Finura
 ```{r}
 BD_3 <- select(BD_Santo_Domingo, Finura)
 BD_3
@@ -80,13 +80,13 @@ BD_3
 table(BD_3$Finura)
 table(BD_3$Finura)/length(BD_3$Finura)*100
 ```
-#Cálculo de promedio de Condición Corporal
+#Tabla de Condición Corporal
 ```{r}
 BD_4 <- select(BD_Santo_Domingo, "Condición Corporal")
 BD_4
 
 ```
-#Promedio de la Condición Corporal de la tropa
+#Frecuencia y Porcentaje de grados de Condición Corporal 
 
 ```{r}
 table(BD_4$"Condición Corporal")
