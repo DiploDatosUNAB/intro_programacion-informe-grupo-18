@@ -10,6 +10,8 @@ knitr::opts_chunk$set(echo = TRUE)
 library(readxl)
 library(dplyr)
 library(ggplot2)
+library(tidyverse)
+library(rstatix)
 ```
 #INTRODUCCIÓN
 El presente trabajo corresponde a trabajo de investigación/extensión realizado para determinar la calidad de fibra de llama en la Jurisdicción Municipal de Rinconada - Departamento Rinconada - Provincia de Jujuy -. Esto como punto de partida para iniciar proceso de mejora en la comercialización de fibra principalmente en lo que respecta al ingresto de los/as productores/as, a partir de la determinación de la estructrura poblacional de llamas en el Distrito de Santo Domingo (Rinconada)
@@ -17,29 +19,103 @@ El presente trabajo corresponde a trabajo de investigación/extensión realizado
 #DESARROLLO
 Para el análisis se toma la base de datos de tropa de llamas pertenecientes a la productora Sonia Martínez, donde se toma la muestra de 59 animales sobre un efectivo de 85. Las varialbles analizadas corresponden a : 1)Edad 2)Sexo 3)Color de Pezuñas 4)Tipo morfológico 5)Medidas Zoométricas 6)Patrón de color 7)Mancha 8)Condición Corporal 9) Estado Fisiológico 10) Largo de Mecha 11) Tipo de Mecha 12)Color 13)Diámetro1 14)Diámetro2 15) Promedio de diámetro1 16)Promedio de diámetro 2022. Los datos son tomados en terreno por el equipo técnico de la Subsecretaría de Agricultura Familiar, Campesina e Indígena y analizados en laboratoria por el grupo de investigadores de la Universidad Católica de  Córdoba.
 ```{r}
-BD_Santo_Domingo <- read_excel("~/Documents/Github/datos/TP_LLAMAS/BD_Santo_Domingo.xlsx", 
+BD_Santo_Domingo <- read_excel("~/Documents/Github/datos/TP_CORREGIDO/BD_Santo_Domingo.xlsx", 
     sheet = "SOMA_BD", skip = 4)
 BD_Santo_Domingo
 ```
 #Se analizan datos de Edad
 ```{r}
-BD_1 <- select(BD_Santo_Domingo, Edad, Pezuñas, Sexo, Morfotipo)
+BD_1 <- select(BD_Santo_Domingo, Edad, Pezuñas, Sexo, Morfotipo, TM, COLOR, Finura)
 BD_1
 ```
-#Se calcula frecuencia y porcentaje de categorías según edad
+#Cálculo de  frecuencia y porcentaje de categorías según edad
+#Cálculo de frecuencia y porcentaje según morfotipo
+#Frecuencia y Porcentaje según sexo
 ```{r}
 table(BD_1$Edad)
 table(BD_1$Edad)/length(BD_1$Edad)
-```
-#Cálculo de frecuencia y porcentaje según morfotipo
-```{r}
 table(BD_1$Morfotipo)
-table(BD_1$Morfotipo)/length(BD_1$Morfotipo)
-```
-#Cálculo de frecuencia y porcentaje según sexo
-```{r}
+table(BD_1$Morfotipo)/length(BD_1$Morfotipo)*100
 table(BD_1$Sexo)
-table(BD_1$Sexo)/length(BD_1$Sexo)
+table(BD_1$Sexo)/length(BD_1$Sexo)*100
 ```
 
+#Frecuencia y Porcentaje de Tamaño de Mecha
+#Frecuencia y Porcentaje de Color
+```{r}
+table(BD_1$TM)
+table(BD_1$TM)/length(BD_1$TM)*100
+table(BD_1$COLOR)
+table(BD_1$COLOR)/length(BD_1$COLOR)*100
+```
+#Tabla de Medidas Zoométricas
+```{r}
+BD_2 <- select(BD_Santo_Domingo, "PT", "PH", "A")
+BD_2
+```
+#Cálculo de promedio PT, PH Y A
+```{r}
+group_by(BD_2) %>%
+  summarise_all(mean)
 
+```
+#Cálculo de desvío estándar para las varialbles PT, PH Y A
+```{r}
+group_by(BD_2) %>%
+  summarise_all(sd)
+```
+#Cálculo de varianza de PT,PH Y A
+```{r}
+var(BD_2$PT)
+var(BD_2$PH)
+var(BD_2$A)
+```
+#Cálculo de promedio de finura
+```{r}
+BD_3 <- select(BD_Santo_Domingo, Finura)
+BD_3
+```
+#Cálculo de frecuencia y porcentaje de Finura de Fibra
+```{r}
+table(BD_3$Finura)
+table(BD_3$Finura)/length(BD_3$Finura)*100
+```
+#Cálculo de promedio de Condición Corporal
+```{r}
+BD_4 <- select(BD_Santo_Domingo, "Condición Corporal")
+BD_4
+
+```
+#Promedio de la Condición Corporal de la tropa
+
+```{r}
+table(BD_4$"Condición Corporal")
+table(BD_4$`Condición Corporal`)/length(BD_4$`Condición Corporal`)*100
+```
+
+#Hipótesis: 1) La tropa de llamas estudiada requiere de mejoramiento genético en cuanto a la calidad de fibra 2) Se debe mejorar el manejo alimenticio 3) Se debe corregir la composición de la tropa
+
+#Hipótesis 1: Mejoramiento de la calidad de fibra
+```{r}
+table(BD_3$Finura)/length(BD_3$Finura)*100
+ggplot(data = BD_3, mapping = aes(x= Finura, y = "F", "G", "M", "SF")) 
+geom_point(na.rm = FALSE)
+```
+
+#En la tabla precedente se refleja el porcentaje de fibra fina (F), gruesa (G), media (M), y súper fina (SF), por lo cual se ve que el 63% de la cantidad de animales muestreados presenta fibra fina y sólo el 1,67% fibra gruesa, en este caso el mejoramiento genético debe avanzar disminuyendo el porcentaje de fibra media en favor de la fina, la cual se emplea para la confección de prendas de mayor calidad.
+
+#Hipótesis 2: Mejorar el Manejo Alimenticio
+```{r}
+table(BD_4$`Condición Corporal`)/length(BD_4$`Condición Corporal`)*100
+```
+
+#De acuerdo a los datos relevado en terreno de la cantidad de animales adultos, aproximadamente el 72% presenta una condición corporal óptima de manera que no resulta necesario complemetar la alimentación con forrajes (alfalfa, maíz, etc)
+
+#Hipótesis 3:Composición de la tropa
+```{r}
+table(BD_1$Edad)
+table(BD_1$Edad)/length(BD_1$Edad)*100
+table(BD_1$Sexo)
+table(BD_1$Sexo)/length(BD_1$Sexo)*100
+```
+#Se estima que el porcentaje de machos en un tropa de llamas debe estar entre un 3% a un 4%, es decir que un macho de acuerdo a las condiciones de alimentación puede servir a 20 a 30 hembras de edad, por lo que se puede decir que el porcentaje de machos es adecuado para la cantidad de llamas adultas. Así mismo, la cantidad de animales viejos representa un 1,67% del plantel lo que es una proporción razonable, esto teniendo en cuenta que los animales viejos no resulan productivos y resulta necesario retirarlos del campo.
