@@ -1,0 +1,99 @@
+---
+title: "TP_CORREGIDO"
+author: "Claudia1930"
+date: "2022-08-24"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readr)
+library(dplyr)
+library(ggplot2)
+```
+
+#INTRODUCCIÓN
+**Las tablas contienen datos relevados correspondientes a las tasas de empleo/subocupación durante el período comprendido por los años 2003 al 2019,
+Así mismo, dentro de cada año en estudio se releva información de tasa de empleo y subocupación discriminada por sexo: varón, mujer**
+
+#VARIABLES A TRABAJAR
+Se trabaja en base a dos tablas que contienen las siguientes variables tomadas en el período 2003 - 2019: 1-Tasa de empleo anual 2-Tasa de empleo anual de mujeres 3-tasa de empleo anual de varones 4-tasa de subocupación anual mujeres 5-tasa de subocupación anual varones
+
+```{r}
+tas_emp %>%
+  left_join(tas_sub)
+```
+# Se filtra los datos de Tasa de Empleo Anual
+```{r}
+tas_emp %>%
+  left_join(tas_sub) %>%
+  filter(sexo != "m" & sexo !="v")
+```
+# En base a los datos filtrados se calcula el promedio de tasa de empleo en el período 2003 - 2019
+```{r}
+tas_emp %>%
+  left_join(tas_sub) %>%
+  filter(sexo != "m" & sexo !="v") %>%
+  summarise(promedio_empleo = mean(tasa_empleo),
+            sd_empleo = sd (tasa_empleo))
+```
+```{r}
+tas_emp %>%
+  left_join(tas_sub) %>%
+  filter(sexo != "TOTAL" & sexo != "v")
+```
+
+#Se calcula promedio y desvío estándar de tasa empleo de mujeres período 2003 - 2019
+```{r}
+tas_emp %>%
+  left_join(tas_sub) %>%
+  filter(sexo != "TOTAL" & sexo != "v") %>%
+  summarise(promedio_empleo = mean (tasa_empleo),
+            sd_empleo = sd(tasa_empleo))
+```
+#CONCLUSIÓN: la tasa de empleo de las mujeres es sensiblemente baja y muestra variaciones moderadas en algunos años. 
+
+# Se calcula la tasa de subocupación de mujeres para el período 2203 -2019
+```{r}
+tas_emp %>%
+  left_join(tas_sub) %>%
+  filter(sexo != "TOTAL" & sexo != "v") %>%
+  summarise(promedio_subm = mean(tasa_subocupacion),
+            sd_empleo = sd (tasa_subocupacion))
+```
+
+
+# Se calcula promedio de tasa de empleo y subocupacion de varones en el período 2003 - 2019
+```{r}
+tas_emp %>%
+  left_join(tas_sub) %>%
+  filter(sexo != "TOTAL" & sexo != "m")
+```
+```{r}
+tas_emp %>%
+  left_join(tas_sub) %>%
+  filter(sexo != "TOTAL" & sexo != "m") %>%
+  summarise(promedio_empleo = mean(tasa_empleo),
+            sd_empleo = sd (tasa_empleo))
+```
+#Conclusión TASA DE EMPLEO VARONES: el dato promedio resulta un valor aceptable y no muestra grandes variaciones en el período considerado.
+
+# Se calcula la promedio y desvío estándar de tasa de subocupacion para varones en el periodo 2003 - 2019
+```{r}
+tas_emp %>%
+  left_join(tas_sub) %>%
+  filter(sexo != "TOTAL" & sexo != "m") %>%
+  summarise(promedio_subv = mean(tasa_subocupacion),
+            sd_subocupación = sd(tasa_subocupacion))
+```
+Conclusión: los valores de subocupación en mujeres y varones presentan variaciones apreciables en algunos años, pero en el período considerado muestra cierta estabilidad en los valores.
+
+
+
+#hIPÓTESIS
+1-RESULTA CONSIDERABLE LA BRECHA DE GÉNERO EN LA ECONOMÍA ARGENTINA DURANTE EL PERÍODO CONSIDERADO
+2-LA BRECHA DE GÉNERO MEJORÓ O EMPEORÓ
+3-QUÉ DATO NO FIGURA EN LA TABLA QUE PERMITIRÍA VISUALIZAR LA SITUACIÓN DE BRECHA DE GÉNERO EN ARGENTINA
+
+
